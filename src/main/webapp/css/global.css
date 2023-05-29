@@ -1,0 +1,24 @@
+@charset "ISO-8859-1";
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,500;1,200;1,400&display=swap');
+
+.center {
+	margin: auto;
+	width: 380px;
+	padding: 10px;
+	text-align: center;
+}
+
+.logout{
+	font-family: 'Poppins', sans-serif;
+	position: relative;
+	margin-right: 15px;
+	top: -45px;
+	float: right;
+}
+
+.table{
+	margin: auto;
+	width: 80%;
+	padding: 10px;
+	text-align: center;
+}

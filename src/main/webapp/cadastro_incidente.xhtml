@@ -1,0 +1,150 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+	<h:head>
+		<title>Cadastro de Incidente</title>
+		<link rel="stylesheet" type="text/css" href="css/global.css" />
+	</h:head>
+	
+	<h:body>
+		<p:tabMenu activeIndex="#{param.i}">
+	        <p:menuitem value="Incidentes" outcome="/listagem_incidente.xhtml" icon="pi pi-fw pi-calendar">
+	            <f:param name="i" value="0"/>
+	        </p:menuitem>
+	        <p:menuitem value="Cadastro de Incidente" outcome="/cadastro_incidente.xhtml" icon="pi pi-fw pi-calendar-plus">
+	            <f:param name="i" value="1"/>
+	        </p:menuitem>
+	        <p:menuitem value="Usuários cadastrados" outcome="/listagem_usuario.xhtml" icon="pi pi-fw pi-user-plus">
+	            <f:param name="i" value="2"/>
+	        </p:menuitem>
+	    </p:tabMenu>
+	    <div class="logout">
+			<h:outputText value="Bem vindo(a) #{usuarioBean.usuario.nome}! "/>
+			<p:commandButton value="Sair" action="#{usuarioBean.logout}"/>
+		</div>
+		
+		<h:form id="form">
+		
+			<p:messages id="messages" showDetail="true" closable="true">
+		    	<p:autoUpdate />
+		    </p:messages>
+		
+			<p:panel header="Dados da vítima">
+				<p:panelGrid columns="2">
+					<p:outputLabel value="Nome Identificado (Iniciais)"/>
+					<p:inputText value="#{incidenteBean.incidente.nomeDaVitima}"/>
+
+					<p:outputLabel value="Sexo" styleClass="custom-element"/>
+					<p:selectOneRadio id="sexo" value="#{incidenteBean.incidente.sexoDaVitima}">
+          					<f:selectItem itemLabel="Feminino" itemValue="Feminino"/>
+          					<f:selectItem itemLabel="Masculino" itemValue="Masculino"/>
+       				</p:selectOneRadio>
+       				
+       				<p:outputLabel value="Idade"/>
+					<p:inputNumber decimalPlaces="0" value="#{incidenteBean.incidente.idadeDaVitima}"/>
+
+       				<p:outputLabel value="Serie / Turno"/>
+       				<p:inputText value="#{incidenteBean.incidente.serieTurnoDaVitima}"/>
+
+       				<p:outputLabel value="Endereço"/>
+					<p:inputText value="#{incidenteBean.incidente.enderecoDaVitima}"/>
+				</p:panelGrid>
+			</p:panel>
+
+			<p:panel header="Dados do agressor">
+				<p:panelGrid columns="2">
+					<p:outputLabel value="Nome Identificado"/>
+					<p:inputText value="#{incidenteBean.incidente.nomeDoAgressor}"/>
+
+					<p:outputLabel value="Sexo"/>
+					<p:selectOneRadio id="sexpAgressor" value="#{incidenteBean.incidente.sexoDoAgressor}">
+          					<f:selectItem itemLabel="Feminino" itemValue="Feminino"/>
+          					<f:selectItem itemLabel="Masculino" itemValue="Masculino"/>
+       				</p:selectOneRadio>
+
+       				<p:outputLabel value="Idade"/>
+					<p:inputNumber decimalPlaces="0" value="#{incidenteBean.incidente.idadeDoAgressor}"/>
+
+
+					<p:outputLabel value="Grau Parentesco / relacionamento com a vitima"/>
+					<p:inputText value="#{incidenteBean.incidente.grauParentescoDoAgressor}" styleClass="custom-element"/>
+
+					<p:outputLabel value="Ocupação (Profissão)"/>
+					<p:inputText value="#{incidenteBean.incidente.ocupacaoDoAgressor}"/>
+				
+					<p:outputLabel value="Raça / Cor"/>
+					<p:selectOneRadio id="racaCor" value="#{incidenteBean.incidente.racaCorDoAgressor}">
+          					<f:selectItem itemLabel="Branca" itemValue="Branca" />
+          					<f:selectItem itemLabel="Preta" itemValue="Preta"/>
+          					<f:selectItem itemLabel="Parda" itemValue="Parda"/>
+          					<f:selectItem itemLabel="Indígena" itemValue="Indigena"/>
+          					<f:selectItem itemLabel="Amarela" itemValue="Amarela"/>
+       				</p:selectOneRadio>
+       			
+       				<p:outputLabel value="Identidade de gênero"/>
+					<p:selectOneRadio id="identGenero" value="#{incidenteBean.incidente.identidadeGeneroDoAgressor}">
+          					<f:selectItem itemLabel="Masculino Cissexual" itemValue="MasculinoCissexual"/>
+          					<f:selectItem itemLabel="Feminino Cissexual" itemValue="FemininoCissexual"/>
+          					<f:selectItem itemLabel="Masculino Transexual" itemValue="MasculinoTransexual"/>
+          					<f:selectItem itemLabel="Feminino Transexual" itemValue="FemininoTransexual"/>
+       				</p:selectOneRadio>
+       			
+       				<p:outputLabel value="Orienração Sexual"/>
+					<p:selectOneRadio id="orientecao" value="#{incidenteBean.incidente.orientacaoSexualDoAgressor}">
+          					<f:selectItem itemLabel="Heterossexual" itemValue="Heterossexual"/>
+          					<f:selectItem itemLabel="Homossexual" itemValue="Homossexual"/>
+          					<f:selectItem itemLabel="Bissexual" itemValue="Bissexual"/>
+          					<f:selectItem itemLabel="Panssexual" itemValue="Panssexual"/>
+          					<f:selectItem itemLabel="Não Binário" itemValue="NaoBinario"/>
+          					<f:selectItem itemLabel="Outro/Não identificado" itemValue="Outro"/>
+       				</p:selectOneRadio>
+       				
+       				<p:outputLabel value="Escolaridade / Ensino Fundamental"/>
+					<p:selectOneRadio id="escolaridade" value="#{incidenteBean.incidente.escolaridadeDoAgressor}">
+          					<f:selectItem itemLabel="1ª" itemValue="1"/>
+          					<f:selectItem itemLabel="2ª" itemValue="2"/>
+          					<f:selectItem itemLabel="3ª" itemValue="3"/>
+          					<f:selectItem itemLabel="4ª" itemValue="4"/>
+          					<f:selectItem itemLabel="5ª" itemValue="5"/>
+          					<f:selectItem itemLabel="6ª" itemValue="6"/>
+          					<f:selectItem itemLabel="7ª" itemValue="7"/>
+          					<f:selectItem itemLabel="8ª" itemValue="8"/>
+          					<f:selectItem itemLabel="9ª" itemValue="9"/>
+       				</p:selectOneRadio>
+       				
+       				<p:outputLabel value="Relato do Incidente"/>
+					<p:inputTextarea value="#{incidenteBean.incidente.relatoDoIncidente}"/>
+				
+					<p:outputLabel value="Que tipo de violação de direito:"/>
+					<p:selectOneRadio id="violacao" value="#{incidenteBean.incidente.violacaoDeDireito}">
+          					<f:selectItem itemLabel="Violência física" itemValue="ViolenciaFisica"/>
+          					<f:selectItem itemLabel="Negligência" itemValue="Negligencia"/>
+          					<f:selectItem itemLabel="Violência sexual" itemValue="ViolenciaSexual"/>
+          					<f:selectItem itemLabel="Violência psicológica" itemValue="ViolenciaPsicologica"/>
+          					<f:selectItem itemLabel="Automutilação" itemValue="Automutilacao"/>
+          					<f:selectItem itemLabel="Suicídio" itemValue="Suicidio"/>
+          					<f:selectItem itemLabel="Gravidez menor de 14 anos" itemValue="GravidezMenor14"/>
+          					<f:selectItem itemLabel="Trabalho Infantil" itemValue="TrabalhoInfantil"/>
+          					<f:selectItem itemLabel="Bullying" itemValue="Bullying"/>
+       				</p:selectOneRadio>
+       			
+       				<p:outputLabel value="Que providências foram tomadas?"/>
+					<p:inputTextarea value="#{incidenteBean.incidente.providencias}"/>
+				</p:panelGrid>
+			</p:panel>
+			
+			<p:panel>
+				<p:panelGrid columns="1">
+					<p:commandButton action="#{incidenteBean.salvar}" value="Registrar" update="form"/>
+				</p:panelGrid>
+			</p:panel>
+		</h:form>
+	</h:body>
+</html>

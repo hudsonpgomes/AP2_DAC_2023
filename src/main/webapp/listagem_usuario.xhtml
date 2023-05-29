@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+	<h:head>
+		<title>Lista de Usuários</title>
+		<link rel="stylesheet" type="text/css" href="css/global.css" />
+	</h:head>
+	
+	<h:body>
+		<p:tabMenu activeIndex="#{param.i}">
+	        <p:menuitem value="Incidentes" outcome="/listagem_incidente.xhtml" icon="pi pi-fw pi-calendar">
+	            <f:param name="i" value="0"/>
+	        </p:menuitem>
+	        <p:menuitem value="Cadastro de Incidente" outcome="/cadastro_incidente.xhtml" icon="pi pi-fw pi-calendar-plus">
+	            <f:param name="i" value="1"/>
+	        </p:menuitem>
+	        <p:menuitem value="Usuários cadastrados" outcome="/listagem_usuario.xhtml" icon="pi pi-fw pi-user-plus">
+	            <f:param name="i" value="2"/>
+	        </p:menuitem>
+	    </p:tabMenu>
+	    <div class="logout">
+			<h:outputText value="Bem vindo(a) #{usuarioBean.usuario.nome}! "/>
+			<p:commandButton value="Sair" action="#{usuarioBean.logout}"/>
+		</div>
+		
+		<h:form>
+			<p:messages id="messages" showDetail="true" closable="true">
+		    	<p:autoUpdate />
+		    </p:messages>
+		    
+		    <p:panel header="Usuários cadastrados">
+		    	<p:dataTable value="#{usuarioBean.lista}" var="u" rowKey="#{u.id}"> 
+					<p:column headerText="Nome do usuário"><p:outputLabel value="#{u.nome}" /></p:column>
+					<p:column headerText="Login"><p:outputLabel value="#{u.login}" /></p:column>
+					<p:column headerText="Senha"><p:outputLabel value="#{u.senha}" /></p:column>
+					<p:column headerText="Data do cadastro"><p:outputLabel value="#{u.data}" /></p:column>
+					<p:column>
+			        	<p:commandButton icon="pi pi-trash" action="#{usuarioBean.deletar}" ajax="false">
+			            	<f:setPropertyActionListener value="#{u}" target="#{usuarioBean.usuario}" />
+			        	</p:commandButton>
+            		</p:column>
+            	</p:dataTable>
+		    </p:panel>
+		</h:form>
+	</h:body>
+</html>
