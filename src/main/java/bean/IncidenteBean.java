@@ -23,7 +23,7 @@ public class IncidenteBean {
 			sucesso("Sucesso", "Denuncia salva com sucesso! ID: " + this.incidente.getId());
 			this.incidente = new Incidente();
 		} catch (Exception ex) {
-			erro("Erro", "Erro ao salvar. " + ex.getMessage());
+			erro("Erro", "Erro ao salvar... " + ex.getMessage());
 		}
 		return null;
 	}
